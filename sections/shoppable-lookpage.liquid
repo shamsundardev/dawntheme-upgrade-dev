@@ -1,0 +1,113 @@
+{% render 'shoppabale_image_snip' %}
+{% schema %}
+{
+  "name": {
+    "en": "Shoppabale image"
+  },
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": {
+        "en": " [Need help?](https:\/\/google.com)"
+      }
+    },
+    {
+      "type": "text",
+      "id": "title-l",
+      "label": {
+        "en": "Heading"
+      },
+      "default": {
+        "en": "Lookbook"
+      }
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-l",
+      "label": {
+        "en": "Image"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": {
+        "en": "Featured product"
+      },
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": {
+            "en": "Featured product"
+          }
+        },
+        {
+          "id": "pin-color",
+          "label": {
+            "en": "button color"
+          },
+          "default": "#334FB4",
+          "type": "color"
+        },
+        {
+          "id": "moveTop",
+          "type": "range",
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "label": {
+            "en": "Percent from top"
+          },
+          "default": 50,
+          "step": 1
+        },
+        {
+          "id": "moveLeft",
+          "type": "range",
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "label": {
+            "en": "Percent from left"
+          },
+          "default": 40,
+          "step": 1
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Shoppabale image"
+      },
+      "category": {
+        "en": "Image"
+      }
+    }
+  ]
+}
+{% endschema %}

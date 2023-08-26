@@ -1,0 +1,155 @@
+{% style %}
+  div:empty {
+  display:block;
+  }
+  @keyframes pulse {
+  0% {
+  transform: scale(1.0);
+  }
+  40% {
+  transform: scale(1.2);
+  }
+  }
+  .lookbook__product img {
+  width: 180px;
+  margin-bottom: 8px;
+  max-width: none;
+  border-radius: 3px;
+  }
+  .lookbook__product--title {
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px !important;
+  color: #121317;
+  }
+  .lookbook__product {
+  display: block;
+  width: 220px;
+  padding: 16px;
+  background: #ffffff;
+  font-size: 16px;
+  }
+  @media only screen and (max-width: 749px) {
+  .lookbook__product .button {
+    min-width: 5px !important;
+    min-height: 5px !important;
+  padding: 0 0.5rem !important;
+
+  }
+  .lookbook__product .button .price {
+    font-size: 0.8rem !important;
+  }
+  .lookbook__product img {
+  width: 70px;
+  margin-bottom: 8px;
+  max-width: none;
+  border-radius: 3px;
+  }
+  .lookbook__product--title {
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px !important;
+  color: #121317;
+  }
+  .lookbook__product {
+  display: block;
+  width: 100px;
+  padding: 10px;
+  background: #ffffff;
+  font-size: 11px;
+  }
+  }
+  #lb--{{section.id}} {
+  position: relative;
+  }
+{% endstyle %}
+{% if section.settings['title-l'] != blank %}
+  <div class="page-width">
+    <h2 class="title {{ section.settings.heading_size }}">{{ section.settings['title-l'] | escape }}</h2>
+  </div>
+{% endif %}
+<div id="lb--{{section.id}}" class="page-width ">
+  {% for block in section.blocks %}
+    {% assign LeftOff = block.settings.moveLeft | minus: 15 %}
+    {% assign TopOff = block.settings.moveTop | minus: 40 %}
+    {% style %}
+      #tooltip--{{block.id}} {
+      display: inline-block;
+      }
+      #dot--{{block.id}} {
+      left: {{ block.settings.moveLeft }}%;
+      top: {{ block.settings.moveTop }}%;
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 100%;
+      background: {{ block.settings.pin-color }};
+      -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+      z-index: 99;
+      animation: 2s pulse ease-in-out infinite;
+      cursor: crosshair;
+      }
+      #tooltip--{{block.id}} .tooltiptext {
+      visibility: hidden;
+      text-align: center;
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+      }
+      #tooltip--{{block.id}}:hover .tooltiptext {
+      visibility: visible;
+      }
+      #dt--{{block.id}} {
+      {% if block.settings.moveLeft < 70 %}
+      left: {{ block.settings.moveLeft }}% !important;
+      {% else %}
+      left: {{ LeftOff }}%;
+      {% endif %}
+      {% if block.settings.moveTop < 60 %}
+      top: {{ block.settings.moveTop }}%;
+      {% else %}
+      top: {{ TopOff }}%;
+      {% endif %}
+      position: absolute;
+      z-index: 1;
+      margin-top : 1.5%;
+      }
+    {% endstyle %}
+    <div id="tooltip--{{block.id }}">
+      <div id="dot--{{block.id }}"></div>
+      <span class="tooltiptext" id="dt--{{ block.id }}">
+        {% assign product = all_products[block.settings.product] %}
+        <div href="{{product.url}}">
+          <div class="lookbook__product">
+            <a href="{{ product.url }}">
+              <img
+                loading="lazy"
+                src=" {{ product.featured_image.src | image_url: '' }}"
+                alt="{{ product.featured_image.alt }}"
+                width="50"
+                height="60"
+              >
+            </a>
+            <a class="lookbook__product--title" href="{{product.url}}">{{ product.title }}</a>
+            <div class="button button--secondary">
+              {% render 'price', product: product %}
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  {% endfor %}
+  {% if section.settings['image-l'] != blank %}
+    <img
+      loading="lazy"
+      style="height:50%;width:100%;"
+      src="{{ section.settings.image-l | image_url: '' }}"
+      alt="{{ section.settings.image-l.alt | escape }}"
+    >
+  {% else %}
+    <p>
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    </p>
+  {% endif %}
+</div>
