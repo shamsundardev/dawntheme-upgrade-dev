@@ -125,10 +125,10 @@
             <a href="{{ product.url }}">
               <img
                 loading="lazy"
-                src=" {{ product.featured_image.src | image_url: '' }}"
+                src=" {{ product.featured_image.src | img_url: '' }}"
                 alt="{{ product.featured_image.alt }}"
-                width="50"
-                height="60"
+                width="80"
+                height="160"
               >
             </a>
             <a class="lookbook__product--title" href="{{product.url}}">{{ product.title }}</a>
@@ -143,8 +143,8 @@
   {% if section.settings['image-l'] != blank %}
     <img
       loading="lazy"
-      style="height:50%;width:100%;"
-      src="{{ section.settings.image-l | image_url: '' }}"
+      style="height:20%;width:100%;"
+      src="{{ section.settings.image-l | img_url: '' }}"
       alt="{{ section.settings.image-l.alt | escape }}"
     >
   {% else %}
