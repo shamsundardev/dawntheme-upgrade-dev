@@ -31,13 +31,13 @@
   }
   @media only screen and (max-width: 749px) {
   .lookbook__product .button {
-    min-width: 5px !important;
-    min-height: 5px !important;
+      min-width: 5px !important;
+      min-height: 5px !important;
   padding: 0 0.5rem !important;
 
   }
   .lookbook__product .button .price {
-    font-size: 0.8rem !important;
+      font-size: 0.8rem !important;
   }
   .lookbook__product img {
   width: 70px;
@@ -58,25 +58,25 @@
   background: #ffffff;
   font-size: 11px;
   }
-  }
-  #lb--{{section.id}} {
-  position: relative;
-  }
+          }
+          #lb--{{ section.id }} {
+          position: relative;
+          }
 {% endstyle %}
 {% if section.settings['title-l'] != blank %}
   <div class="page-width">
     <h2 class="title {{ section.settings.heading_size }}">{{ section.settings['title-l'] | escape }}</h2>
   </div>
 {% endif %}
-<div id="lb--{{section.id}}" class="page-width ">
+<div id="lb--{{ section.id }}" class="page-width ">
   {% for block in section.blocks %}
     {% assign LeftOff = block.settings.moveLeft | minus: 15 %}
     {% assign TopOff = block.settings.moveTop | minus: 40 %}
     {% style %}
-      #tooltip--{{block.id}} {
+      #tooltip--{{ block.id }} {
       display: inline-block;
       }
-      #dot--{{block.id}} {
+      #dot--{{ block.id }} {
       left: {{ block.settings.moveLeft }}%;
       top: {{ block.settings.moveTop }}%;
       position: absolute;
@@ -90,17 +90,17 @@
       animation: 2s pulse ease-in-out infinite;
       cursor: crosshair;
       }
-      #tooltip--{{block.id}} .tooltiptext {
+      #tooltip--{{ block.id }} .tooltiptext {
       visibility: hidden;
       text-align: center;
       /* Position the tooltip */
       position: absolute;
       z-index: 1;
       }
-      #tooltip--{{block.id}}:hover .tooltiptext {
+      #tooltip--{{ block.id }}:hover .tooltiptext {
       visibility: visible;
       }
-      #dt--{{block.id}} {
+      #dt--{{ block.id }} {
       {% if block.settings.moveLeft < 70 %}
       left: {{ block.settings.moveLeft }}% !important;
       {% else %}
@@ -116,11 +116,11 @@
       margin-top : 1.5%;
       }
     {% endstyle %}
-    <div id="tooltip--{{block.id }}">
-      <div id="dot--{{block.id }}"></div>
+    <div id="tooltip--{{ block.id }}">
+      <div id="dot--{{ block.id }}"></div>
       <span class="tooltiptext" id="dt--{{ block.id }}">
         {% assign product = all_products[block.settings.product] %}
-        <div href="{{product.url}}">
+        <div href="{{ product.url }}">
           <div class="lookbook__product">
             <a href="{{ product.url }}">
               <img
@@ -131,7 +131,7 @@
                 height="160"
               >
             </a>
-            <a class="lookbook__product--title" href="{{product.url}}">{{ product.title }}</a>
+            <a class="lookbook__product--title" href="{{ product.url }}">{{ product.title }}</a>
             <div class="button button--secondary">
               {% render 'price', product: product %}
             </div>
